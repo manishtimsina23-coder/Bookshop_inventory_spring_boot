@@ -18,7 +18,7 @@ public class OrderController {
         this.orderMapper = orderMapper;
     }
 
-    @PostMapping("/{customerid}")
+    @PostMapping("{customerid}")
     public ResponseEntity<OrderDTO> createOrder(@RequestBody Order order, @PathVariable Long customerid) {
         Order order1 = orderMapper.toEntity(order);
         Order savedOrder = orderService.addOrder(order,customerid);

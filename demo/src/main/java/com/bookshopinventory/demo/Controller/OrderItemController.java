@@ -16,12 +16,13 @@ public class OrderItemController {
 
     public OrderItemController(OrderItemService orderItemService) {
         this.orderItemService = orderItemService;
+        this.orderItemMapper = new OrderItemMapper();
     }
 
-    @PostMapping("/{orderid}")
-    public ResponseEntity<OrderItemDTO> addOrderItem(@RequestBody OrderItem orderitem, @PathVariable Long orderid){
+    @PostMapping("/{orderid}/{bookid}")
+    public ResponseEntity<OrderItemDTO> addOrderItem(@RequestBody OrderItem orderitem, @PathVariable Long orderid, @PathVariable Long bookid){
         OrderItem order = orderItemMapper.toEntity(orderitem);
-        OrderItem savedorder = orderItemService.addOrderItem(order,orderid);
+        OrderItem savedorder = orderItemService.addOrderItem(order,orderid,bookid);
         return ResponseEntity.ok(orderItemMapper.toDTO(savedorder));
     }
 }
